@@ -3,30 +3,30 @@ kind: Deployment
 
 metadata:
   namespace: expense-project
-  name: mysql-dep
+  name: backend-dep
   labels:
     created_by: naveenrajoli
-    project: expense
-    app: mysql
+    project: database
+    app: backend
     tier: database
 spec:
   replicas: 1
   selector:
     matchLabels:
-      project: expense
-      app: mysql
+      project: database
+      app: backend
       tier: database
   template:
     metadata:
-      name: mysql-pod
+      name: backend-pod
       labels:
-        project: expense
-        app: mysql
+        project: database
+        app: backend
         tier: database
     spec:
       containers:
-      - name: mysql
-        image: naveenrajoli/2025mysql:1.0.0 
+      - name: backend
+        image: naveenrajoli/2025backend:1.0.0 
         ports:
         - containerPort: 3306
 
@@ -35,12 +35,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-svc
+  name: backend-svc
   namespace: expense-project
 spec:
   selector:
-    project: expense
-    app: mysql
+    project: database
+    app: backend
     tier: database
   ports:
   - protocol: TCP
