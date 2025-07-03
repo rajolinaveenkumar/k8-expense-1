@@ -22,3 +22,9 @@ spec:
         project: database
         app: mysql
         tier: database
+    spec:
+      containers:
+      - name: mysql
+        image:
+        ports:
+        - containerPort: 3306
