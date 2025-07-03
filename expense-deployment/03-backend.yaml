@@ -6,29 +6,27 @@ metadata:
   name: backend-dep
   labels:
     created_by: naveenrajoli
-    project: database
+    project: expense
     app: backend
-    tier: database
+    tier: database-tier
 spec:
   replicas: 1
   selector:
     matchLabels:
-      project: database
       app: backend
-      tier: database
+      tier: database-tier
   template:
     metadata:
       name: backend-pod
       labels:
-        project: database
         app: backend
-        tier: database
+        tier: database-tier
     spec:
       containers:
       - name: backend
         image: naveenrajoli/2025backend:1.0.0 
         ports:
-        - containerPort: 3306
+        - containerPort: 8080
 
 --- 
 
@@ -39,10 +37,9 @@ metadata:
   namespace: expense-project
 spec:
   selector:
-    project: database
     app: backend
-    tier: database
+    tier: database-tier
   ports:
   - protocol: TCP
-    port: 3306
-    targetPort: 3306
+    port: 8080
+    targetPort: 8080
