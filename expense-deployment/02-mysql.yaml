@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
+  namespace: expense-project
   name: mysql-dep
   labels:
     created_by: naveenrajoli
@@ -25,7 +26,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image:
+        image: naveenrajoli/2025mysql:1.0.0 
         ports:
         - containerPort: 3306
 
@@ -33,6 +34,9 @@ spec:
 
 apiVersion: v1
 kind: Service
+metadata:
+  name: mysql-svc
+  namespace: expense-project
 spec:
   selector:
     project: database
