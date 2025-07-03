@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: mysql-dep
+  labels:
+    created_by: naveenrajoli
+    project: database
+    app: mysql
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: database
+      app: mysql
+      tier: database
+  template:
+    metadata:
+      name: mysql-pod
+      labels:
+        project: database
+        app: mysql
+        tier: database
