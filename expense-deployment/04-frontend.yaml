@@ -3,43 +3,44 @@ kind: Deployment
 
 metadata:
   namespace: expense-project
-  name: backend-dep
+  name: frontend-dep
   labels:
     created_by: naveenrajoli
     project: expense
-    app: backend
-    tier: backend-tier
+    app: frontend
+    tier: web-tier
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
-      tier: backend-tier
+      app: frontend
+      tier: web-tier
   template:
     metadata:
-      name: backend-pod
+      name: frontend-pod
       labels:
-        app: backend
-        tier: backend-tier
+        app: frontend
+        tier: web-tier
     spec:
       containers:
-      - name: backend
-        image: naveenrajoli/2025backend:1.0.0
+      - name: frontend
+        image: naveenrajoli/2025frontend:1.0.0
         ports:
-        - containerPort: 8080
+        - containerPort: 8079
 
 --- 
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-svc
+  name: frontend-svc
   namespace: expense-project
 spec:
+  type: LoadBalancer
   selector:
-    app: backend
-    tier: backend-tier
+    app: frontend
+    tier: web-tier
   ports:
   - protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 80
+    targetPort: 8079

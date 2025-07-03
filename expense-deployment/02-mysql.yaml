@@ -13,14 +13,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      project: expense
+      
       app: mysql
       tier: database
   template:
     metadata:
       name: mysql-pod
       labels:
-        project: expense
+        
         app: mysql
         tier: database
     spec:
@@ -39,7 +39,7 @@ metadata:
   namespace: expense-project
 spec:
   selector:
-    project: expense
+    
     app: mysql
     tier: database
   ports:
